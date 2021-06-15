@@ -9,7 +9,7 @@ CONTACT_TYPE_CHOICES = (
 class Contact(models.Model):
     type = models.CharField(max_length=20, choices=CONTACT_TYPE_CHOICES)
     name = models.CharField(max_length=256)
-    email = models.models.EmailField(max_length=256)
+    email = models.EmailField(max_length=256)
     salutation = models.CharField(max_length=256)
 
 # Create model Country (key(Text20), value(Text256)).
@@ -30,8 +30,8 @@ class Address(models.Model):
 class Invoice(models.Model):
     title = models.CharField(max_length=256)
     body = models.TextField(blank=True)
-    date = models.models.DateField(auto_now=False, auto_now_add=False)
-    due = models.models.DateField(auto_now=False, auto_now_add=False)
+    date = models.DateField(auto_now=False, auto_now_add=False)
+    due = models.DateField(auto_now=False, auto_now_add=False)
     condition = models.CharField(max_length=256, default='10 Tage netto')
 
     address = models.ForeignKey(Address)
