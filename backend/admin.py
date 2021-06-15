@@ -4,14 +4,14 @@ from django.contrib import admin
 from .models import Contact, Country, Address, Invoice, InvoicePosition
 
 @admin.register(Contact)
-class ContactAdmin(admin.ContactAdmin):
+class ContactAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Country)
-class CountryAdmin(admin.CountryAdmin):
+class CountryAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Invoice)
-class InvoiceAdmin(admin.InvoiceAdmin):
+class InvoiceAdmin(admin.ModelAdmin):
     pass
