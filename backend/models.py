@@ -23,8 +23,8 @@ class Address(models.Model):
     zip = models.CharField(max_length=10)
     city = models.CharField(max_length=256)
 
-    contact = models.ForeignKey(Contact)
-    country = models.ForeignKey(Country)
+    contact = models.ForeignKey('Contact', on_delete=models.CASCADE, related_name='address')
+    country = models.ForeignKey('Country', on_delete=models.CASCADE, related_name='address')
 
 # Create model Invoice (title(Text256), body(longtext), date(datum), due(datum), condition(Text256)).
 class Invoice(models.Model):
@@ -34,7 +34,7 @@ class Invoice(models.Model):
     due = models.DateField(auto_now=False, auto_now_add=False)
     condition = models.CharField(max_length=256, default='10 Tage netto')
 
-    address = models.ForeignKey(Address)
+    address = models.ForeignKey('Address', on_delete=models.CASCADE, related_name='invoice')
 
 # Create model InvoicePosition (title(Text256), body(longtext), quantity(number dezi), amount(number dezi)).
 class InvoicePosition(models.Model):
@@ -43,4 +43,4 @@ class InvoicePosition(models.Model):
     quantity = models.PositiveIntegerField()
     amount = models.DecimalField(max_digits=9, decimal_places=2)
 
-    invoice = models.ForeignKey(Invoice)
+    invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE, related_name='invoiceposition')
