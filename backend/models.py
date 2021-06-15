@@ -1,10 +1,15 @@
 from django.db import models
 
+CONTACT_TYPE_CHOICES = (
+    ('private', 'Privat'),
+    ('company', 'Company'),
+)
+
 # Create model Contact (type(Text20, selectlist), name(Text256), email(Text256, email valid), salutation(Text256)).
 class Contact(models.Model):
-    type = models.CharField(max_length=20)
+    type = models.CharField(max_length=20, choices=CONTACT_TYPE_CHOICES)
     name = models.CharField(max_length=256)
-    email = models.models.EmailField(_(""), max_length=256)
+    email = models.models.EmailField(max_length=256)
     salutation = models.CharField(max_length=256)
 
 # Create model Country (key(Text20), value(Text256)).
@@ -22,13 +27,13 @@ class Address(models.Model):
 class Invoice(models.Model):
     title = models.CharField(max_length=256)
     body = models.TextField(blank=True)
-    date = models.models.DateField(_(""), auto_now=False, auto_now_add=False)
-    due = models.models.DateField(_(""), auto_now=False, auto_now_add=False)
+    date = models.models.DateField(auto_now=False, auto_now_add=False)
+    due = models.models.DateField(auto_now=False, auto_now_add=False)
     condition = models.CharField(max_length=256)
 
 # Create model InvoicePosition (title(Text256), body(longtext), quantity(number dezi), amount(number dezi)).
 class InvoicePosition(models.Model):
     title = models.CharField(max_length=256)
     body = models.TextField(blank=True)
-    quantity = models.PositiveIntegerField(_(""))
-    amount = models.DecimalField(_(""), max_digits=8, decimal_places=2)
+    quantity = models.PositiveIntegerField()
+    amount = models.DecimalField(max_digits=9, decimal_places=2)
