@@ -12,6 +12,16 @@ class Contact(models.Model):
     email = models.EmailField(max_length=256)
     salutation = models.CharField(max_length=256)
 
+    def __str__(self):
+        return self.name
+
+    @property
+    def count_address(self):
+        """
+        Return count address of current instance
+        """
+        return self.address.select_related().count()
+
 # Create model Country (key(Text20), value(Text256)).
 class Country(models.Model):
     key = models.CharField(max_length=20, primary_key=True)

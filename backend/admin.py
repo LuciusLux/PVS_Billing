@@ -11,12 +11,14 @@ class ContactInline(admin.StackedInline):
 class InvoiceInline(admin.StackedInline):
     model = InvoicePosition
     extra = 0
+
 # Register Contact (Inline, filter, search, list).
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     inlines = [ContactInline]
     list_filter = ['type']
     search_fields = ['name']
+    list_display = ['__str__', 'type', 'count_address']
 
 # Register Country (search).
 @admin.register(Country)
