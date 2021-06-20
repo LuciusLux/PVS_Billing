@@ -52,11 +52,12 @@ class Invoice(models.Model):
     def __str__(self):
         return self.title
 
+
 # Create model InvoicePosition (title(Text256), body(longtext), quantity(number dezi), amount(number dezi)).
 class InvoicePosition(models.Model):
     title = models.CharField(max_length=256)
     body = models.TextField(blank=True)
-    quantity = models.PositiveIntegerField()
-    amount = models.DecimalField(max_digits=9, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)
+    amount = models.DecimalField(max_digits=9, decimal_places=2, default=0)
 
     invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE, related_name='invoiceposition')

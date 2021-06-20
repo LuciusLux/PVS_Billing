@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db.models import Sum
+from django.db.models import F
 
 # Register your models here.
 from .models import Contact, Country, Address, Invoice, InvoicePosition
@@ -29,5 +31,21 @@ class CountryAdmin(admin.ModelAdmin):
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
     inlines = [InvoiceInline]
-    search_fields = ['__str__']
-    list_display = ['date', 'due']
+    search_fields = ['address__contact__name','title']
+    list_display = ['contact_name','date', 'due', 'total_amount']
+
+    # Contact for Invoice
+    def contact_name(self, obj):
+        addressId = Address.objects.filter(invoice=obj.id)[:1]
+        contactObj = Contact.objects.filter(address=addressId)
+        return contactObj[0].name
+
+    # All amount for InvoicePosition 
+    def total_amount(self, obj):
+        # Only get value as float without tags
+        amount = InvoicePosition.objects.filter(invoice=obj.id).aggregate(sum=Sum(F('amount') * F('quantity')))['sum']
+        isString = isinstance(amount, str)
+        if isString == True:
+            #format an two decimal digits
+            amount = '{:0.2f}'.format(amount)
+        return amount
