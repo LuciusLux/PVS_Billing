@@ -29,4 +29,5 @@ class CountryAdmin(admin.ModelAdmin):
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
     inlines = [InvoiceInline]
-    search_fields = ['name', 'title']
+    search_fields = ['__str__']
+    list_display = ['date', 'due']

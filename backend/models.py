@@ -27,6 +27,9 @@ class Country(models.Model):
     key = models.CharField(max_length=20, primary_key=True)
     value = models.CharField(max_length=256)
 
+    def __str__(self):
+        return self.value
+
 # Create model Address (street(Text256), zip(Text10), city(Text256)).
 class Address(models.Model):
     street = models.CharField(max_length=256)
@@ -45,6 +48,9 @@ class Invoice(models.Model):
     condition = models.CharField(max_length=256, default='10 Tage netto')
 
     address = models.ForeignKey('Address', on_delete=models.CASCADE, related_name='invoice')
+
+    def __str__(self):
+        return self.title
 
 # Create model InvoicePosition (title(Text256), body(longtext), quantity(number dezi), amount(number dezi)).
 class InvoicePosition(models.Model):
