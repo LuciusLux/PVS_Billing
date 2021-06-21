@@ -9,7 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class ContactApiViewSet(ModelViewSet):
     queryset = Contact.objects.all()
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filter_backends = [DjangoFilterBackend]
     filterset_fields = ['type']
 
     def get_serializer_class(self):
