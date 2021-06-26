@@ -30,4 +30,4 @@ class CountryAdmin(admin.ModelAdmin):
 class InvoiceAdmin(admin.ModelAdmin):
     inlines = [InvoiceInline]
     search_fields = ['address__contact__name','title']
-    list_display = ['contact_name','date', 'due', 'total_amount']
+    list_display = ['contact_name','date', 'due', 'all_amount']

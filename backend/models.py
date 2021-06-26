@@ -66,7 +66,7 @@ class Invoice(models.Model):
 
     # All amount for InvoicePosition
     @property
-    def total_amount(self, obj):
+    def all_amount(self, obj):
         # Only get value as float without tags
         amount = InvoicePosition.objects.filter(invoice=obj.id).aggregate(sum=Sum(F('amount') * F('quantity')))['sum']
         isString = isinstance(amount, str)
@@ -74,6 +74,19 @@ class Invoice(models.Model):
             #format an two decimal digits
             amount = '{:0.2f}'.format(amount)
         return amount
+
+    #Total Amount for Invoice Serializer
+    @property
+    def totalAmount(self):
+        totalAmount = InvoicePosition.objects.filter(invoice=self.id).aggregate(sum=Sum(F('amount') * F('quantity')))['sum']
+        return totalAmount
+
+    #Total Contact Name for Invoice Serializer
+    @property
+    def contactName(self):
+        addressId = Address.objects.filter(invoices=self.id)[:1]
+        contactObj = Contact.objects.filter(addresses=addressId)
+        return contactObj[0].name    
 
 
 # Create model InvoicePosition (title(Text256), body(longtext), quantity(number dezi), amount(number dezi)).
@@ -87,3 +100,6 @@ class InvoicePosition(models.Model):
 
     def __str__(self):
         return self.title
+
+    def total(self):
+        return self.amount * self.quantity    
