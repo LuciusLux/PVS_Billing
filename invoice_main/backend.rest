@@ -3,7 +3,7 @@ GET http://127.0.0.1:8000/api/v1/contact/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET Contact List filtered for type private
-GET http://127.0.0.1:8000/api/v1/contact/?type=priv
+GET http://127.0.0.1:8000/api/v1/contact/?type=private
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### CREATE Contact
@@ -12,30 +12,30 @@ Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
 {
-  "name": "NewTester",
-  "type": "priv",
+  "name": "NewTesterin",
+  "type": "company",
   "email": "user@example.com",
-  "salutation": "Welcome"
+  "salutation": "Welcome Honey"
 }
 
 ### GET Specific Contact
-GET http://127.0.0.1:8000/api/v1/contact/1/
+GET http://127.0.0.1:8000/api/v1/contact/3/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### CHANGE Specific Contact
-PUT http://127.0.0.1:8000/api/v1/contact/1/
+PUT http://127.0.0.1:8000/api/v1/contact/4/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
 {
   "name": "Testerin",
-  "type": "priv",
+  "type": "private",
   "email": "test@test.com",
-  "salutation": "string"
+  "salutation": "Welcome Madam"
 }
 
 ### DELETE Specific Contact
-DELETE http://127.0.0.1:8000/api/v1/contact/1/
+DELETE http://127.0.0.1:8000/api/v1/contact/4/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
@@ -53,15 +53,15 @@ Content-Type: application/json
     "zip": "777",
     "city": "Imaging",
     "country": "1",
-    "contact": 1
+    "contact": 2
 }
 
 ### GET Specific Address
-GET http://127.0.0.1:8000/api/v1/address/1/
+GET http://127.0.0.1:8000/api/v1/address/5/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### CHANGE Specific Contact
-PUT http://127.0.0.1:8000/api/v1/address/1/
+PUT http://127.0.0.1:8000/api/v1/address/5/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
@@ -74,7 +74,7 @@ Content-Type: application/json
 }
 
 ### DELETE Specific Contact
-DELETE http://127.0.0.1:8000/api/v1/address/1/
+DELETE http://127.0.0.1:8000/api/v1/address/5/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
@@ -83,7 +83,7 @@ GET http://127.0.0.1:8000/api/v1/invoice/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET Invoice List inclusive search for contact_name "Tester"
-GET http://127.0.0.1:8000/api/v1/invoices/?search=Tester
+GET http://127.0.0.1:8000/api/v1/invoice/?search=Tester
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### CREATE Invoice
@@ -101,11 +101,11 @@ Content-Type: application/json
 }
 
 ### GET Specific Invoice
-GET http://127.0.0.1:8000/api/v1/invoice/1/
+GET http://127.0.0.1:8000/api/v1/invoice/3/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### UPDATE Specific Invoice
-PUT http://127.0.0.1:8000/api/v1/invoice/1/
+PUT http://127.0.0.1:8000/api/v1/invoice/3/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
@@ -119,15 +119,15 @@ Content-Type: application/json
 }
 
 ### DELETE Specific Invoice
-DELETE http://127.0.0.1:8000/api/v1/invoice/1/
+DELETE http://127.0.0.1:8000/api/v1/invoice/4/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET InvoicePosition List
-GET http://127.0.0.1:8000/api/v1/invoice_position/
+GET http://127.0.0.1:8000/api/v1/invoiceposition/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### CREATE InvoicePosition
-POST http://127.0.0.1:8000/api/v1/invoice_position/
+POST http://127.0.0.1:8000/api/v1/invoiceposition/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
@@ -137,16 +137,16 @@ Content-Type: application/json
     "body": "shiny",
     "amount": "999",
     "quantity": 3,
-    "invoice": 1
+    "invoice": 3
 
 }
 
 ### GET Specific InvoicePosition
-GET http://127.0.0.1:8000/api/v1/invoice_positions/1/
+GET http://127.0.0.1:8000/api/v1/invoiceposition/3/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### UPDATE Specific InvoicePosition
-PUT http://127.0.0.1:8000/api/v1/invoice_positions/1/
+PUT http://127.0.0.1:8000/api/v1/invoiceposition/3/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 Content-Type: application/json
 
@@ -156,22 +156,22 @@ Content-Type: application/json
     "body": "Testing Games",
     "amount": "5",
     "quantity": 10,
-    "invoice": 1
+    "invoice": 3
 
 }
 
 ### DELETE Specific InvoicePosition
-DELETE http://127.0.0.1:8000/api/v1/invoice_positions/1/
+DELETE http://127.0.0.1:8000/api/v1/invoiceposition/5/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET Countries List
-GET http://127.0.0.1:8000/api/v1/countries/
+GET http://127.0.0.1:8000/api/v1/country/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET Countries List inclusive search for value "Schweiz"
-GET http://127.0.0.1:8000/api/v1/countries/?search=Schweiz
+GET http://127.0.0.1:8000/api/v1/country/?search=Schweiz
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET Specific Country
-GET http://127.0.0.1:8000/api/v1/countries/1/
+GET http://127.0.0.1:8000/api/v1/country/1/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39

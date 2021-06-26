@@ -66,8 +66,8 @@ class Invoice(models.Model):
     #Total Contact Name for Invoice Serializer
     @property
     def getContactName(self):
-        addressId = Address.objects.filter(invoices=self.id)[:1]
-        contactObj = Contact.objects.filter(addresses=addressId)
+        addressId = Address.objects.filter(invoice=self.id)[:1]
+        contactObj = Contact.objects.filter(address=addressId)
         return contactObj[0].name    
 
 
