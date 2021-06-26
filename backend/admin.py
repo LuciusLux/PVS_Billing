@@ -31,3 +31,19 @@ class InvoiceAdmin(admin.ModelAdmin):
     inlines = [InvoiceInline]
     search_fields = ['address__contact__name','title']
     list_display = ['contact_name','date', 'due', 'all_amount']
+
+    # Contact for Invoice
+    def contact_name(self, obj):
+        addressId = Address.objects.filter(invoice=obj.id)[:1]
+        contactObj = Contact.objects.filter(address=addressId)
+        return contactObj[0].name
+
+    # All amount for InvoicePosition
+    def all_amount(self, obj):
+        # Only get value as float without tags
+        amount = InvoicePosition.objects.filter(invoice=obj.id).aggregate(sum=Sum(F('amount') * F('quantity')))['sum']
+        isString = isinstance(amount, str)
+        if isString == True:
+            #format an two decimal digits
+            amount = '{:0.2f}'.format(amount)
+        return amount
