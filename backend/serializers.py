@@ -11,7 +11,7 @@ class AddressNestedSerializer(ModelSerializer):
 
 # Create Nested and Read Only for Invoice.
 class InvoicePositionNestedSerializer(ModelSerializer):
-    total = serializers.FloatField(source='total')
+    total = serializers.FloatField(source='calculateTotal')
 
     class Meta:
         model = InvoicePosition
@@ -19,16 +19,11 @@ class InvoicePositionNestedSerializer(ModelSerializer):
         ReadOnlyField = ['id', 'title', 'amount', 'quantity', 'total']
 
 class ContactSerializer(ModelSerializer):
-    Address = AddressNestedSerializer(many=True, read_only=True)
+    address = AddressNestedSerializer(many=True, read_only=True)
     class Meta:
         model = Contact
         fields = ['id', 'name', 'type', 'email', 'salutation', 'address']
         read_only_fields = ['address']
-
-class ContactCreateSerializer(ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = '__all__'
 
 class AddressSerializer(ModelSerializer):
     country_name = serializers.CharField(source='country')
@@ -45,8 +40,8 @@ class AddressCreateSerializer(ModelSerializer):
 
 class InvoiceSerializer(ModelSerializer):
     positions = InvoicePositionNestedSerializer(many=True, read_only=True)
-    contact_name = serializers.CharField(source='contactName')
-    total_amount = serializers.FloatField(source='totalAmount')
+    contact_name = serializers.CharField(source='getContactName')
+    total_amount = serializers.FloatField(source='calculateTotalAmount')
 
     class Meta:
         model = Invoice

@@ -26,7 +26,7 @@ schema_view = get_schema_view(
       default_version='v1',
       description="An in-depth thesis in the subject PVS at TEKO.",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="nobody@knows.ch"),
+      contact=openapi.Contact(email="contact@invoice.ch"),
       license=openapi.License(name="MIT License"),
    ),
    public=True,

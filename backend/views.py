@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import ContactSerializer, ContactCreateSerializer, AddressSerializer, AddressCreateSerializer, InvoiceSerializer, InvoiceCreateSerializer, InvoicePositionSerializer, CountrySerializer
+from .serializers import ContactSerializer, AddressSerializer, AddressCreateSerializer, InvoiceSerializer, InvoiceCreateSerializer, InvoicePositionSerializer, CountrySerializer
 from .models import Contact, Address, Invoice, InvoicePosition, Country
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import SearchFilter
@@ -12,11 +12,6 @@ class ContactApiViewSet(ModelViewSet):
     queryset = Contact.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['type']
-
-    def get_serializer_class(self):
-        if self.action == 'create' or self.action == 'update':
-            return ContactCreateSerializer
-        return ContactSerializer
 
 class AddressApiView(ModelViewSet):
     queryset = Address.objects.all()

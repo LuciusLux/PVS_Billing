@@ -59,13 +59,13 @@ class Invoice(models.Model):
 
     #Total Amount for Invoice Serializer
     @property
-    def totalAmount(self):
+    def calculateTotalAmount(self):
         totalAmount = InvoicePosition.objects.filter(invoice=self.id).aggregate(sum=Sum(F('amount') * F('quantity')))['sum']
         return totalAmount
 
     #Total Contact Name for Invoice Serializer
     @property
-    def contactName(self):
+    def getContactName(self):
         addressId = Address.objects.filter(invoices=self.id)[:1]
         contactObj = Contact.objects.filter(addresses=addressId)
         return contactObj[0].name    
@@ -83,5 +83,5 @@ class InvoicePosition(models.Model):
     def __str__(self):
         return self.title
 
-    def total(self):
+    def calculateTotal(self):
         return self.amount * self.quantity    
