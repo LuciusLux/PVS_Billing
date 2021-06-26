@@ -15,9 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+#API Schema
+schema_view = get_schema_view(
+   openapi.Info(
+      title="PVS Invoice API",
+      default_version='v1',
+      description="An in-depth thesis in the subject PVS at TEKO.",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="nobody@knows.ch"),
+      license=openapi.License(name="MIT License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
-    path
+    path('api/v1/', include('backend.urls')),
+    path('api/v1/doc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

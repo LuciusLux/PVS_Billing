@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from .models import Contact, Address, Invoice, InvoicePosition, Country
 
 # Create Nested and Read Only for Address.
@@ -26,5 +27,10 @@ class AddressSerializer(ModelSerializer):
     contact = serializers.CharField()
 
     class Meta:
-        model = Contact
-        fields = '__all__'
+        model = Address
+        fields = ['id', 'street', 'zip', 'city', 'country_name', 'contact']
+
+class AddressCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Address
+        fields = ['id', 'street', 'zip', 'city', 'country', 'contact']   

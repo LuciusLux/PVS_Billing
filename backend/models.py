@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Sum
+from django.db.models import F
 
 CONTACT_TYPE_CHOICES = (
     ('private', 'Privat'),
@@ -54,6 +56,24 @@ class Invoice(models.Model):
 
     def __str__(self):
         return self.title
+
+    # Contact for Invoice
+    @property
+    def contact_name(self, obj):
+        addressId = Address.objects.filter(invoice=obj.id)[:1]
+        contactObj = Contact.objects.filter(address=addressId)
+        return contactObj[0].name
+
+    # All amount for InvoicePosition
+    @property
+    def total_amount(self, obj):
+        # Only get value as float without tags
+        amount = InvoicePosition.objects.filter(invoice=obj.id).aggregate(sum=Sum(F('amount') * F('quantity')))['sum']
+        isString = isinstance(amount, str)
+        if isString == True:
+            #format an two decimal digits
+            amount = '{:0.2f}'.format(amount)
+        return amount
 
 
 # Create model InvoicePosition (title(Text256), body(longtext), quantity(number dezi), amount(number dezi)).
