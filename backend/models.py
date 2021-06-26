@@ -39,6 +39,9 @@ class Address(models.Model):
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE, related_name='address')
     country = models.ForeignKey('Country', on_delete=models.CASCADE, related_name='address')
 
+    def __str__(self):
+        return self.street + ", " + self.zip + " " + self.city
+
 # Create model Invoice (title(Text256), body(longtext), date(datum), due(datum), condition(Text256)).
 class Invoice(models.Model):
     title = models.CharField(max_length=256)
@@ -61,3 +64,6 @@ class InvoicePosition(models.Model):
     amount = models.DecimalField(max_digits=9, decimal_places=2, default=0)
 
     invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE, related_name='invoiceposition')
+
+    def __str__(self):
+        return self.title

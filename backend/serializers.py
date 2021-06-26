@@ -20,3 +20,11 @@ class ContactCreateSerializer(ModelSerializer):
     class Meta:
         model = Contact
         fields = '__all__'
+
+class AddressSerializer(ModelSerializer):
+    country_name = serializers.CharField(source='country')
+    contact = serializers.CharField()
+
+    class Meta:
+        model = Contact
+        fields = '__all__'
