@@ -173,5 +173,5 @@ GET http://127.0.0.1:8000/api/v1/country/?search=Schweiz
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
 
 ### GET Specific Country
-GET http://127.0.0.1:8000/api/v1/country/1/
+GET http://127.0.0.1:8000/api/v1/country/2/
 Authorization: Token bd82975ec513c09b2da0434b9f9bfea2204baf39
